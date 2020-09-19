@@ -1,12 +1,11 @@
 <?php 
 
-class Change_Othello {
-
+class Change
+{
     public $player;
     public $y;
     public $x;
     public $array;
-
     // -----------------------
     // オセロ全方向 置き換え関数
     // -----------------------
