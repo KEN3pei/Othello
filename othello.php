@@ -5,17 +5,13 @@
 // ---------------
 function initial_value() 
 {
-    for ($i = 0; $i < 10; $i++)
-    {
-        for ($v = 0; $v < 10; $v++)
-        {
+    for ($i = 0; $i < 10; $i++){
+        for ($v = 0; $v < 10; $v++){
             $array[$i][$v] =  "-1";
         }
     }
-    for ($y = 1; $y <= 8; $y++)
-    {
-        for ($x = 1; $x <= 8; $x++)
-        {
+    for ($y = 1; $y <= 8; $y++){
+        for ($x = 1; $x <= 8; $x++){
             $array[$y][$x] = " 0";
         }
     }
@@ -28,10 +24,8 @@ function initial_value()
 // ---------------
 function output($array)
 {
-    for ($i = 1; $i <= 8; $i++)
-    {
-        for ($v = 1; $v <= 8; $v++)
-        {
+    for ($i = 1; $i <= 8; $i++){
+        for ($v = 1; $v <= 8; $v++){
             echo $array[$i][$v];
         }
         echo "\n";
@@ -257,10 +251,8 @@ function canput($player, $array)
 {
     $buck_array = $array;
     $canput_count = 0;
-    for ($i = 1; $i <= 8; $i++)
-    {
-        for ($v = 1; $v <= 8; $v++)
-        {
+    for ($i = 1; $i <= 8; $i++){
+        for ($v = 1; $v <= 8; $v++){
             $y = $i;
             $x = $v; 
             $check_array = all_othello($player, $y, $x, $array);
@@ -303,10 +295,8 @@ while ($canput_count !== 0){
         if ($canput_count == 0){
             $one = 0;
             $two = 0;
-            foreach ($array as $value)
-            {
-                foreach ($value as $num)
-                {
+            foreach ($array as $value){
+                foreach ($value as $num){
                     if ($num == 1){
                         $one += 1;
                     }elseif ($num == 2){
