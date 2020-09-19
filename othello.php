@@ -3,14 +3,19 @@
 // ---------------
 // 初期値設定関数
 // ---------------
-function initial_value() {
-    for($i = 0; $i < 10; $i++){
-        for($v = 0; $v < 10; $v++){
+function initial_value() 
+{
+    for($i = 0; $i < 10; $i++)
+    {
+        for($v = 0; $v < 10; $v++)
+        {
             $array[$i][$v] =  "-1";
         }
     }
-    for($y = 1; $y <= 8; $y++){
-        for($x = 1; $x <= 8; $x++){
+    for($y = 1; $y <= 8; $y++)
+    {
+        for($x = 1; $x <= 8; $x++)
+        {
             $array[$y][$x] = " 0";
         }
     }
@@ -21,9 +26,12 @@ function initial_value() {
 // ---------------
 // オセロ配列出力関数
 // ---------------
-function output($array){
-    for($i = 1; $i <= 8; $i++){
-        for($v = 1; $v <= 8; $v++){
+function output($array)
+{
+    for($i = 1; $i <= 8; $i++)
+    {
+        for($v = 1; $v <= 8; $v++)
+        {
             echo $array[$i][$v];
         }
         echo "\n";
@@ -32,16 +40,20 @@ function output($array){
 // -----------------------
 // オセロ上方向 置き換え関数
 // -----------------------
-function othello_top($player, $y, $x, $array){
+function othello_top($player, $y, $x, $array)
+{
     $buck_array = $array;
-    if($array[$y - 1][$x] == " " . (3 - $player)){
+    if($array[$y - 1][$x] == " " . (3 - $player))
+    {
         $array[$y][$x] = " " . $player;
     }
-    while($array[$y - 1][$x] == " " . (3 - $player)){
+    while($array[$y - 1][$x] == " " . (3 - $player))
+    {
         $y--;
         $array[$y][$x] = " " . $player;
         // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-        if($array[$y - 1][$x] == " 0" || $y == 1){
+        if($array[$y - 1][$x] == " 0" || $y == 1)
+        {
             $array = $buck_array;
             break;
         }
@@ -51,16 +63,20 @@ function othello_top($player, $y, $x, $array){
 // -----------------------
 // オセロ下方向 置き換え関数
 // -----------------------
-function othello_under($player, $y, $x, $array) {
+function othello_under($player, $y, $x, $array)
+{
     $buck_array = $array;
-    if($array[$y + 1][$x] == " " . (3 - $player)){
+    if($array[$y + 1][$x] == " " . (3 - $player))
+    {
         $array[$y][$x] = " " . $player;
     }
-    while($array[$y + 1][$x] == " " . (3 - $player)){
+    while($array[$y + 1][$x] == " " . (3 - $player))
+    {
         $y++;
         $array[$y][$x] = " " . $player;
         // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-        if($array[$y + 1][$x] == " 0" || $y == 8){
+        if($array[$y + 1][$x] == " 0" || $y == 8)
+        {
             $array = $buck_array;
             break;
         }
@@ -70,16 +86,20 @@ function othello_under($player, $y, $x, $array) {
 // -----------------------
 // オセロ右方向 置き換え関数
 // -----------------------
-function othello_right($player, $y, $x, $array) {
+function othello_right($player, $y, $x, $array) 
+{
     $buck_array = $array;
-    if($array[$y][$x + 1] == " " . (3 - $player)){
+    if($array[$y][$x + 1] == " " . (3 - $player))
+    {
         $array[$y][$x] = " " . $player;
     }
-    while($array[$y][$x + 1] == " " . (3 - $player)){
+    while($array[$y][$x + 1] == " " . (3 - $player))
+    {
         $x++;
         $array[$y][$x] = " " . $player;
         // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-        if($array[$y][$x + 1] == " 0" || $x == 8){
+        if($array[$y][$x + 1] == " 0" || $x == 8)
+        {
             $array = $buck_array;
             break;
         }
@@ -89,16 +109,20 @@ function othello_right($player, $y, $x, $array) {
 // -----------------------
 // オセロ左方向 置き換え関数
 // -----------------------
-function othello_left($player, $y, $x, $array) {
+function othello_left($player, $y, $x, $array) 
+{
     $buck_array = $array;
-    if($array[$y][$x - 1] == " " . (3 - $player)){
+    if($array[$y][$x - 1] == " " . (3 - $player))
+    {
         $array[$y][$x] = " " . $player;
     }
-    while($array[$y][$x - 1] === " " . (3 - $player)){
+    while($array[$y][$x - 1] === " " . (3 - $player))
+    {
         $x--;
         $array[$y][$x] = " " . $player;
         // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-        if($array[$y][$x - 1] == " 0" || $x == 1){
+        if($array[$y][$x - 1] == " 0" || $x == 1)
+        {
             $array = $buck_array;
             break;
         }
@@ -109,17 +133,21 @@ function othello_left($player, $y, $x, $array) {
 // -----------------------
 // オセロ左上方向 置き換え関数
 // -----------------------
-function othello_top_left($player, $y, $x, $array){
+function othello_top_left($player, $y, $x, $array)
+{
     $buck_array = $array;
-    if($array[$y - 1][$x - 1] == " " . (3 - $player)){
+    if($array[$y - 1][$x - 1] == " " . (3 - $player))
+    {
         $array[$y][$x] = " " . $player;
     }
-    while($array[$y - 1][$x - 1] == " " . (3 - $player)){
+    while($array[$y - 1][$x - 1] == " " . (3 - $player))
+    {
         $x--;
         $y--;
         $array[$y][$x] = " " . $player;
         // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-        if($array[$y - 1][$x - 1] == " 0" || $x == 1 || $y == 1){
+        if($array[$y - 1][$x - 1] == " 0" || $x == 1 || $y == 1)
+        {
             $array = $buck_array;
             break;
         }
@@ -129,17 +157,21 @@ function othello_top_left($player, $y, $x, $array){
 // -----------------------
 // オセロ右上方向 置き換え関数
 // -----------------------
-function othello_top_right($player, $y, $x, $array){
+function othello_top_right($player, $y, $x, $array)
+{
     $buck_array = $array;
-    if($array[$y - 1][$x + 1] == " " . (3 - $player)){
+    if($array[$y - 1][$x + 1] == " " . (3 - $player))
+    {
         $array[$y][$x] = " " . $player;
     }
-    while($array[$y - 1][$x + 1] == " " . (3 - $player)){
+    while($array[$y - 1][$x + 1] == " " . (3 - $player))
+    {
         $x++;
         $y--;
         $array[$y][$x] = " " . $player;
         // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-        if($array[$y - 1][$x + 1] == " 0" || $x == 8 || $y == 1){
+        if($array[$y - 1][$x + 1] == " 0" || $x == 8 || $y == 1)
+        {
             $array = $buck_array;
             break;
         }
@@ -149,17 +181,21 @@ function othello_top_right($player, $y, $x, $array){
 // -----------------------
 // オセロ左下方向 置き換え関数
 // -----------------------
-function othello_under_left($player, $y, $x, $array){
+function othello_under_left($player, $y, $x, $array)
+{
     $buck_array = $array;
-    if($array[$y + 1][$x - 1] == " " . (3 - $player)){
+    if($array[$y + 1][$x - 1] == " " . (3 - $player))
+    {
         $array[$y][$x] = " " . $player;
     }
-    while($array[$y + 1][$x - 1] == " " . (3 - $player)){
+    while($array[$y + 1][$x - 1] == " " . (3 - $player))
+    {
         $x--;
         $y++;
         $array[$y][$x] = " " . $player;
         // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-        if($array[$y + 1][$x - 1] == " 0" || $x == 1 || $y == 8){
+        if($array[$y + 1][$x - 1] == " 0" || $x == 1 || $y == 8)
+        {
             $array = $buck_array;
             break;
         }
@@ -169,17 +205,21 @@ function othello_under_left($player, $y, $x, $array){
 // -----------------------
 // オセロ右下方向 置き換え関数
 // -----------------------
-function othello_under_right($player, $y, $x, $array){
+function othello_under_right($player, $y, $x, $array)
+{
     $buck_array = $array;
-    if($array[$y + 1][$x + 1] == " " . (3 - $player)){
+    if($array[$y + 1][$x + 1] == " " . (3 - $player))
+    {
         $array[$y][$x] = " " . $player;
     }
-    while($array[$y + 1][$x + 1] == " " . (3 - $player)){
+    while($array[$y + 1][$x + 1] == " " . (3 - $player))
+    {
         $x++;
         $y++;
         $array[$y][$x] = " " . $player;
         // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-        if($array[$y + 1][$x + 1] == " 0" || $x == 8 || $y == 8){
+        if($array[$y + 1][$x + 1] == " 0" || $x == 8 || $y == 8)
+        {
             $array = $buck_array;
             break;
         }
@@ -189,11 +229,14 @@ function othello_under_right($player, $y, $x, $array){
 // -----------------------
 // オセロ全方向 置き換え関数
 // -----------------------
-function all_othello($player, $y, $x, $array){
-    if($y < 1 || $y > 8 || $x < 1 || $x > 8){
+function all_othello($player, $y, $x, $array)
+{
+    if($y < 1 || $y > 8 || $x < 1 || $x > 8)
+    {
         return $array;
     }
-    if($array[$y][$x] !== " 0"){
+    if($array[$y][$x] !== " 0")
+    {
         return $array;
     }
     $array = othello_top($player, $y, $x, $array);
@@ -211,7 +254,8 @@ function all_othello($player, $y, $x, $array){
 // -----------------------
 // 標準入力関数
 // -----------------------
-function input($array, $player){
+function input($array, $player)
+{
     echo "Y軸を選択 :";
     $y = rtrim(fgets(STDIN), "\n");
     echo "X軸を選択 :";
@@ -222,10 +266,11 @@ function input($array, $player){
 // -----------------------
 // playerをchangeさせて入力させる関数
 // -----------------------
-function change_player_and_input($array, $player){
-    
+function change_player_and_input($array, $player)
+{
     $buck_array = $array;
-    while($array === $buck_array){
+    while($array === $buck_array)
+    {
         echo "next player is " . $player . "\n";
         $array = input($array, $player);
         output($array);
@@ -235,11 +280,14 @@ function change_player_and_input($array, $player){
 // -----------------------
 // canput関数 置けるところがあるか check & count
 // -----------------------
-function canput($player, $array){
+function canput($player, $array)
+{
     $buck_array = $array;
     $canput_count = 0;
-    for($i = 1; $i <= 8; $i++){
-        for($v = 1; $v <= 8; $v++){
+    for($i = 1; $i <= 8; $i++)
+    {
+        for($v = 1; $v <= 8; $v++)
+        {
             $y = $i;
             $x = $v; 
             $check_array = all_othello($player, $y, $x, $array);
@@ -259,13 +307,15 @@ $canput_count = 4;
 
 echo "player1か2を選択 ";
 $player = trim(fgets(STDIN));
-if(!($player == "1" || $player == "2")){
+if(!($player == "1" || $player == "2"))
+{
     echo "入力ミスがありました";
     return ;
 }
 
 // オセロが置けなければ標準入力をさせ直す
-while($array === $buck_array){
+while($array === $buck_array)
+{
     output($array);
     $array = input($array, $player);
     output($array);
@@ -274,8 +324,8 @@ while($array === $buck_array){
 // $player = 3 - $player;
 // $array = change_player_and_input($array, $player);
 
-while($canput_count !== 0){
-
+while($canput_count !== 0)
+{
     $player = 3 - $player;
     $canput_count = canput($player, $array);
     if($canput_count == 0){
@@ -283,11 +333,15 @@ while($canput_count !== 0){
         if($canput_count == 0){
             $one = 0;
             $two = 0;
-            foreach($array as $value){
-                foreach($value as $num){
-                    if($num == 1){
+            foreach($array as $value)
+            {
+                foreach($value as $num)
+                {
+                    if($num == 1)
+                    {
                         $one += 1;
-                    }elseif($num == 2){
+                    }elseif($num == 2)
+                    {
                         $two += 1;
                     }
                 }
