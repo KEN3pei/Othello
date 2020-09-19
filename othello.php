@@ -3,8 +3,7 @@
 // ---------------
 // 初期値設定関数
 // ---------------
-function initial_value() 
-{
+function initial_value() {
     for ($i = 0; $i < 10; $i++){
         for ($v = 0; $v < 10; $v++){
             $array[$i][$v] =  "-1";
@@ -22,8 +21,7 @@ function initial_value()
 // ---------------
 // オセロ配列出力関数
 // ---------------
-function output($array)
-{
+function output($array){
     for ($i = 1; $i <= 8; $i++){
         for ($v = 1; $v <= 8; $v++){
             echo $array[$i][$v];
@@ -34,8 +32,7 @@ function output($array)
 // -----------------------
 // オセロ上方向 置き換え関数
 // -----------------------
-function othello_top($player, $y, $x, $array)
-{
+function othello_top($player, $y, $x, $array){
     $buck_array = $array;
     if ($array[$y - 1][$x] == " " . (3 - $player)){
         $array[$y][$x] = " " . $player;
@@ -54,8 +51,7 @@ function othello_top($player, $y, $x, $array)
 // -----------------------
 // オセロ下方向 置き換え関数
 // -----------------------
-function othello_under($player, $y, $x, $array)
-{
+function othello_under($player, $y, $x, $array){
     $buck_array = $array;
     if ($array[$y + 1][$x] == " " . (3 - $player)){
         $array[$y][$x] = " " . $player;
@@ -74,8 +70,7 @@ function othello_under($player, $y, $x, $array)
 // -----------------------
 // オセロ右方向 置き換え関数
 // -----------------------
-function othello_right($player, $y, $x, $array) 
-{
+function othello_right($player, $y, $x, $array) {
     $buck_array = $array;
     if ($array[$y][$x + 1] == " " . (3 - $player)){
         $array[$y][$x] = " " . $player;
@@ -94,8 +89,7 @@ function othello_right($player, $y, $x, $array)
 // -----------------------
 // オセロ左方向 置き換え関数
 // -----------------------
-function othello_left($player, $y, $x, $array) 
-{
+function othello_left($player, $y, $x, $array){
     $buck_array = $array;
     if ($array[$y][$x - 1] == " " . (3 - $player)){
         $array[$y][$x] = " " . $player;
@@ -115,8 +109,7 @@ function othello_left($player, $y, $x, $array)
 // -----------------------
 // オセロ左上方向 置き換え関数
 // -----------------------
-function othello_top_left($player, $y, $x, $array)
-{
+function othello_top_left($player, $y, $x, $array){
     $buck_array = $array;
     if ($array[$y - 1][$x - 1] == " " . (3 - $player)){
         $array[$y][$x] = " " . $player;
@@ -136,8 +129,7 @@ function othello_top_left($player, $y, $x, $array)
 // -----------------------
 // オセロ右上方向 置き換え関数
 // -----------------------
-function othello_top_right($player, $y, $x, $array)
-{
+function othello_top_right($player, $y, $x, $array){
     $buck_array = $array;
     if ($array[$y - 1][$x + 1] == " " . (3 - $player)){
         $array[$y][$x] = " " . $player;
@@ -157,8 +149,7 @@ function othello_top_right($player, $y, $x, $array)
 // -----------------------
 // オセロ左下方向 置き換え関数
 // -----------------------
-function othello_under_left($player, $y, $x, $array)
-{
+function othello_under_left($player, $y, $x, $array){
     $buck_array = $array;
     if ($array[$y + 1][$x - 1] == " " . (3 - $player)){
         $array[$y][$x] = " " . $player;
@@ -178,8 +169,7 @@ function othello_under_left($player, $y, $x, $array)
 // -----------------------
 // オセロ右下方向 置き換え関数
 // -----------------------
-function othello_under_right($player, $y, $x, $array)
-{
+function othello_under_right($player, $y, $x, $array){
     $buck_array = $array;
     if ($array[$y + 1][$x + 1] == " " . (3 - $player)){
         $array[$y][$x] = " " . $player;
@@ -199,8 +189,7 @@ function othello_under_right($player, $y, $x, $array)
 // -----------------------
 // オセロ全方向 置き換え関数
 // -----------------------
-function all_othello($player, $y, $x, $array)
-{
+function all_othello($player, $y, $x, $array){
     if ($y < 1 || $y > 8 || $x < 1 || $x > 8){
         return $array;
     }
@@ -222,8 +211,7 @@ function all_othello($player, $y, $x, $array)
 // -----------------------
 // 標準入力関数
 // -----------------------
-function input($array, $player)
-{
+function input($array, $player){
     echo "Y軸を選択 :";
     $y = rtrim(fgets(STDIN), "\n");
     echo "X軸を選択 :";
@@ -234,8 +222,7 @@ function input($array, $player)
 // -----------------------
 // playerをchangeさせて入力させる関数
 // -----------------------
-function change_player_and_input($array, $player)
-{
+function change_player_and_input($array, $player){
     $buck_array = $array;
     while ($array === $buck_array){
         echo "next player is " . $player . "\n";
@@ -247,8 +234,7 @@ function change_player_and_input($array, $player)
 // -----------------------
 // canput関数 置けるところがあるか check & count
 // -----------------------
-function canput($player, $array)
-{
+function canput($player, $array){
     $buck_array = $array;
     $canput_count = 0;
     for ($i = 1; $i <= 8; $i++){
