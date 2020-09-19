@@ -2,7 +2,7 @@
 
 require 'set.php';
 require 'change.php';
-// require 'canput.php';
+require 'canput.php';
 // ---------------
 // オセロ配列出力関数
 // ---------------
@@ -22,7 +22,7 @@ function inPut($array, $player){
     $y = rtrim(fgets(STDIN), "\n");
     echo "X軸を選択 :";
     $x = rtrim(fgets(STDIN), "\n");
-    $change_othello = new Change_Othello;
+    $change_othello = new Change;
     $change_othello->player = $player;
     $change_othello->y = $y;
     $change_othello->x = $x;
@@ -43,38 +43,18 @@ function changePlayerInput($array, $player){
     }
     return $array;
 }
-// -----------------------
-// canput関数 置けるところがあるか check & count
-// -----------------------
-function canPut($player, $array){
 
-    $change_othello = new Change_Othello;
-    $change_othello->player = $player;
-    $change_othello->array = $array;
-
-    $canput_count = 0;
-
-    for ($y = 1; $y <= 8; $y++){
-        for ($x = 1; $x <= 8; $x++){
-            $change_othello->y = $y;
-            $change_othello->x = $x;
-            $check_array = $change_othello->allOthello();
-            if ($change_othello->array !== $check_array && $change_othello->array[$y][$x] == 0){
-                $canput_count++;
-            }
-        }
-    }
-    return $canput_count;
-}
-
-$set = new Set();
+$set = new SetInitial();
 echo "player1か2を選択 ";
 $player = $set->setPlayer();
 $array = $set->initial_value();
 
 $buck_array = $array;
 
-$canput_count = canPut($player, $array);
+$chechboard = new ChechBoard();
+$chechboard->player = $player;
+$chechboard->array = $array;
+$canput_count = $chechboard->canPut($player, $array);
 
 // オセロが置けなければ標準入力をさせ直す
 while ($array == $buck_array){
@@ -86,9 +66,15 @@ while ($array == $buck_array){
 while ($canput_count !== 0){
 
     $player = 3 - $player;
-    $canput_count = canPut($player, $array);
+
+    $chechboard->player = $player;
+    $chechboard->array = $array;
+    $canput_count = $chechboard->canPut($player, $array);
+
     if ($canput_count == 0){
-        $canput_count = canPut((3 - $player), $array);
+        $chechboard->player = 3 - $player;
+        $canput_count = $chechboard->canPut($player, $array);
+    
         if ($canput_count == 0){
             $one = 0;
             $two = 0;
