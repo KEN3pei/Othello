@@ -199,11 +199,9 @@ function all_othello($player, $y, $x, $array){
     $array = othello_top($player, $y, $x, $array);
     $array = othello_under($player, $y, $x, $array);
     $array = othello_right($player, $y, $x, $array);
-    // $array = othello_left($player, $y, $x, $array);
     $array = othello_top_right($player, $y, $x, $array);
     $array = othello_top_left($player, $y, $x, $array);
     $array = othello_left($player, $y, $x, $array);
-    // output($array);
     $array = othello_under_right($player, $y, $x, $array);
     $array = othello_under_left($player, $y, $x, $array);
     return $array;
