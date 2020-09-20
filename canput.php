@@ -1,4 +1,5 @@
 <?php 
+// namespace Othello;
 
 // require 'change.php';
 
@@ -9,11 +10,11 @@ class ChechBoard
     // -----------------------
     // canput関数 置けるところがあるか check & count
     // -----------------------
-    function canPut($player, $array){
+    function canPut(){
 
         $change_othello = new Change;
-        $change_othello->player = $player;
-        $change_othello->array = $array;
+        $change_othello->player = $this->player;
+        $change_othello->array = $this->array;
 
         $canput_count = 0;
 

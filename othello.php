@@ -1,8 +1,10 @@
 <?php 
+// namespace Othello;
 
 require 'set.php';
 require 'change.php';
 require 'canput.php';
+require 'changeplayer.php';
 // ---------------
 // オセロ配列出力関数
 // ---------------
@@ -30,19 +32,6 @@ function inPut($array, $player){
     $array = $change_othello->allOthello();
     return $array;
 }
-// -----------------------
-// playerをchangeさせて入力させる関数
-// -----------------------
-function changePlayerInput($array, $player){
-    
-    $buck_array = $array;
-    while ($array === $buck_array){
-        echo "next player is " . $player . "\n";
-        $array = inPut($array, $player);
-        outPut($array);
-    }
-    return $array;
-}
 
 $set = new SetInitial();
 echo "player1か2を選択 ";
@@ -63,17 +52,18 @@ while ($array == $buck_array){
     outPut($array);
 }
 
+$changeplayer = new ChangePlayer;
 while ($canput_count !== 0){
 
     $player = 3 - $player;
 
     $chechboard->player = $player;
     $chechboard->array = $array;
-    $canput_count = $chechboard->canPut($player, $array);
+    $canput_count = $chechboard->canPut();
 
     if ($canput_count == 0){
         $chechboard->player = 3 - $player;
-        $canput_count = $chechboard->canPut($player, $array);
+        $canput_count = $chechboard->canPut();
     
         if ($canput_count == 0){
             $one = 0;
@@ -92,8 +82,10 @@ while ($canput_count !== 0){
         echo "置けるところがないのでスキップします";
     }
     echo "置けるパターン数 : " . $canput_count . "パターン \n";
-    $array = changePlayerInput($array, $player);
-
+    
+    $changeplayer->player = $player;
+    $changeplayer->array = $array;
+    $array = $changeplayer->changePlayerInput();
 }
 echo "置けるところがなくなりました\n";
 echo "Player1は" . $one . "\n";
