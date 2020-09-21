@@ -1,16 +1,19 @@
 <?php
+require_once("initarray.php");
 
-class InOutPut
+class InOutPut extends InitArray
 {
     public $player;
     public $array;
-
+    
     // ---------------
     // オセロ配列出力関数
     // ---------------
     function outPut(){
-        for ($i = 1; $i <= 8; $i++){
-            for ($v = 1; $v <= 8; $v++){
+        $h = $this->h;
+        $w = $this->w;
+        for ($i = 1; $i <= $h; $i++){
+            for ($v = 1; $v <= $w; $v++){
                 print_r($this->array[$i][$v]);
             }
             echo "\n";
