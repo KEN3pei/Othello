@@ -1,4 +1,5 @@
 <?php
+require 'inoutput.php';
 
 class ChangePlayer
 {
@@ -10,10 +11,15 @@ class ChangePlayer
     function changePlayerInput(){
         
         $buck_array = $this->array;
+        $inoutput = new InOutPut;
+        $inoutput->player = $this->player;
+        $inoutput->array = $this->array;
+
         while ($this->array === $buck_array){
             echo "next player is " . $this->player . "\n";
-            $this->array = inPut($this->array, $this->player );
-            outPut($this->array);
+            $this->array = $inoutput->inPut();
+            $inoutput->array = $this->array;
+            $inoutput->outPut();
         }
         return $this->array;
     }
