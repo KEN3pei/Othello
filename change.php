@@ -1,7 +1,7 @@
 <?php 
-// namespace Othello;
+require_once("initarray.php");
 
-class Change
+class Change extends InitArray
 {
     public $player;
     public $y;
@@ -16,8 +16,10 @@ class Change
         $x = $this->x;
         $player = $this->player;
         $array = $this->array;
+        $h = $this->h;
+        $w = $this->w;
 
-        if ($y < 1 || $y > 8 || $x < 1 || $x > 8){
+        if ($y < 1 || $y > $h || $x < 1 || $x > $w){
             return $array;
         }
         if ($array[$y][$x] !== " 0"){
@@ -58,6 +60,8 @@ class Change
     // オセロ下方向 置き換え関数
     // -----------------------
     public function othelloUnder($player, $y, $x, $array) {
+        $h = $this->h;
+
         $buck_array = $array;
         if ($array[$y + 1][$x] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -66,7 +70,7 @@ class Change
             $y++;
             $array[$y][$x] = " " . $player;
             // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-            if ($array[$y + 1][$x] == " 0" || $y == 8){
+            if ($array[$y + 1][$x] == " 0" || $y == $h){
                 $array = $buck_array;
                 break;
             }
@@ -77,6 +81,8 @@ class Change
     // オセロ右方向 置き換え関数
     // -----------------------
     public function othelloRight($player, $y, $x, $array) {
+        $w = $this->w;
+
         $buck_array = $array;
         if ($array[$y][$x + 1] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -85,7 +91,7 @@ class Change
             $x++;
             $array[$y][$x] = " " . $player;
             // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-            if ($array[$y][$x + 1] == " 0" || $x == 8){
+            if ($array[$y][$x + 1] == " 0" || $x == $w){
                 $array = $buck_array;
                 break;
             }
@@ -136,6 +142,8 @@ class Change
     // オセロ右上方向 置き換え関数
     // -----------------------
     public function othelloTopRight($player, $y, $x, $array){
+        $w = $this->w;
+
         $buck_array = $array;
         if ($array[$y - 1][$x + 1] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -145,7 +153,7 @@ class Change
             $y--;
             $array[$y][$x] = " " . $player;
             // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-            if ($array[$y - 1][$x + 1] == " 0" || $x == 8 || $y == 1){
+            if ($array[$y - 1][$x + 1] == " 0" || $x == $w || $y == 1){
                 $array = $buck_array;
                 break;
             }
@@ -156,6 +164,8 @@ class Change
     // オセロ左下方向 置き換え関数
     // -----------------------
     public function othelloUnderLeft($player, $y, $x, $array){
+        $h = $this->h;
+
         $buck_array = $array;
         if ($array[$y + 1][$x - 1] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -165,7 +175,7 @@ class Change
             $y++;
             $array[$y][$x] = " " . $player;
             // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-            if ($array[$y + 1][$x - 1] == " 0" || $x == 1 || $y == 8){
+            if ($array[$y + 1][$x - 1] == " 0" || $x == 1 || $y == $h){
                 $array = $buck_array;
                 break;
             }
@@ -176,6 +186,9 @@ class Change
     // オセロ右下方向 置き換え関数
     // -----------------------
     public function othelloUnderRight($player, $y, $x, $array){
+        $h = $this->h;
+        $w = $this->w;
+
         $buck_array = $array;
         if ($array[$y + 1][$x + 1] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -185,7 +198,7 @@ class Change
             $y++;
             $array[$y][$x] = " " . $player;
             // 空白があれば中止&元に戻す,8まで行っても2がない場合元に戻す
-            if ($array[$y + 1][$x + 1] == " 0" || $x == 8 || $y == 8){
+            if ($array[$y + 1][$x + 1] == " 0" || $x == $w || $y == $h){
                 $array = $buck_array;
                 break;
             }

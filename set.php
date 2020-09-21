@@ -1,24 +1,27 @@
 <?php 
-// namespace Othello;
+require_once("initarray.php");
 
-class SetInitial
+class SetInitial extends InitArray
 {
     // ---------------
     // 初期値設定関数
     // ---------------
     public function initial_value() {
-        for ($i = 0; $i < 10; $i++){
-            for ($v = 0; $v < 10; $v++){
+        $h = $this->h;
+        $w = $this->w;
+
+        for ($i = 0; $i < $h+2; $i++){
+            for ($v = 0; $v < $w+2; $v++){
                 $array[$i][$v] =  "-1";
             }
         }
-        for ($y = 1; $y <= 8; $y++){
-            for ($x = 1; $x <= 8; $x++){
+        for ($y = 1; $y <= $h; $y++){
+            for ($x = 1; $x <= $w; $x++){
                 $array[$y][$x] = " 0";
             }
         }
-        $array[4][4] = $array[5][5] = " 2";
-        $array[4][5] = $array[5][4] = " 1";
+        $array[$h/2][$w/2] = $array[($h/2)+1][($w/2)+1] = " 2";
+        $array[$h/2][($w/2)+1] = $array[($h/2)+1][$w/2] = " 1";
         return $array;
     }
 

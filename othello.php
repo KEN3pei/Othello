@@ -1,11 +1,11 @@
 <?php 
-// namespace Othello;
 
 require 'set.php';
 require 'change.php';
 require 'canput.php';
 require 'changeplayer.php';
 
+// 初期値のセット
 $set = new SetInitial();
 echo "player1か2を選択 ";
 $player = $set->setPlayer();
@@ -53,6 +53,7 @@ while ($canput_count !== 0){
             break;
         }
         echo "置けるところがないのでスキップします";
+        $player = 3 - $player;
     }
     echo "置けるパターン数 : " . $canput_count . "パターン \n";
     
