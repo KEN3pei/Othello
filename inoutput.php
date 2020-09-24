@@ -3,9 +3,6 @@ require_once("initarray.php");
 
 class InOutPut extends InitArray
 {
-    public $player;
-    public $array;
-    
     // ---------------
     // オセロ配列出力関数
     // ---------------
@@ -28,9 +25,9 @@ class InOutPut extends InitArray
         echo "X軸を選択 :";
         $x = rtrim(fgets(STDIN), "\n");
         $change_othello = new Change;
-        $change_othello->player = $this->player;
         $change_othello->y = $y;
         $change_othello->x = $x;
+        $change_othello->player = $this->player;
         $change_othello->array = $this->array;
         $array = $change_othello->allOthello();
         return $array;

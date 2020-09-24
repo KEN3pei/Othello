@@ -1,10 +1,9 @@
 <?php 
+// require_once("updatevar.php");
 require_once("initarray.php");
 
-class ChechBoard extends InitArray
+class CheckBoard extends InitArray
 {
-    public $player;
-    public $array;
     // -----------------------
     // canput関数 置けるところがあるか check & count
     // -----------------------
@@ -15,15 +14,13 @@ class ChechBoard extends InitArray
         $change_othello = new Change;
         $change_othello->player = $this->player;
         $change_othello->array = $this->array;
-
         $canput_count = 0;
-
         for ($y = 1; $y <= $h; $y++){
             for ($x = 1; $x <= $w; $x++){
                 $change_othello->y = $y;
                 $change_othello->x = $x;
                 $check_array = $change_othello->allOthello();
-                if ($change_othello->array !== $check_array && $change_othello->array[$y][$x] == 0){
+                if ($this->array !== $check_array){
                     $canput_count++;
                 }
             }

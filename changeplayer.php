@@ -1,10 +1,9 @@
 <?php
-require 'inoutput.php';
+require_once("inoutput.php");
+require_once("initarray.php");
 
-class ChangePlayer
+class ChangePlayer extends InitArray
 {
-    public $player;
-    public $array;
     // -----------------------
     // playerをchangeさせて入力させる関数
     // -----------------------
