@@ -1,12 +1,11 @@
 <?php 
+// require_once("updatevar.php");
 require_once("initarray.php");
 
 class Change extends InitArray
 {
-    public $player;
     public $y;
     public $x;
-    public $array;
     // -----------------------
     // オセロ全方向 置き換え関数
     // -----------------------
@@ -25,22 +24,17 @@ class Change extends InitArray
         if ($array[$y][$x] !== " 0"){
             return $array;
         }
-
-        $array = $this->othelloTop($player, $y, $x, $array);
-        $array = $this->othelloUnder($player, $y, $x, $array);
-        $array = $this->othelloRight($player, $y, $x, $array);
-        $array = $this->othelloTopRight($player, $y, $x, $array);
-        $array = $this->othelloTopLeft($player, $y, $x, $array);
-        $array = $this->othelloLeft($player, $y, $x, $array);
-        $array = $this->othelloUnderRight($player, $y, $x, $array);
-        $array = $this->othelloUnderLeft($player, $y, $x, $array);
+        $methods = ["Top", "Under", "Right", "topRight", "topLeft", "Left", "underRight", "underLeft"];
+        foreach($methods as $method){
+            $array = $this->$method($player, $y, $x, $array);
+        }
         return $array;
     }
 
     // -----------------------
     // オセロ上方向 置き換え関数
     // -----------------------
-    public function othelloTop($player, $y, $x, $array){
+    public function Top($player, $y, $x, $array){
         $buck_array = $array;
         if ($array[$y - 1][$x] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -59,9 +53,8 @@ class Change extends InitArray
     // -----------------------
     // オセロ下方向 置き換え関数
     // -----------------------
-    public function othelloUnder($player, $y, $x, $array) {
+    public function Under($player, $y, $x, $array) {
         $h = $this->h;
-
         $buck_array = $array;
         if ($array[$y + 1][$x] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -80,9 +73,8 @@ class Change extends InitArray
     // -----------------------
     // オセロ右方向 置き換え関数
     // -----------------------
-    public function othelloRight($player, $y, $x, $array) {
+    public function Right($player, $y, $x, $array) {
         $w = $this->w;
-
         $buck_array = $array;
         if ($array[$y][$x + 1] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -101,7 +93,7 @@ class Change extends InitArray
     // -----------------------
     // オセロ左方向 置き換え関数
     // -----------------------
-    public function othelloLeft($player, $y, $x, $array) {
+    public function Left($player, $y, $x, $array) {
         $buck_array = $array;
         if ($array[$y][$x - 1] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -121,7 +113,7 @@ class Change extends InitArray
     // -----------------------
     // オセロ左上方向 置き換え関数
     // -----------------------
-    public function othelloTopLeft($player, $y, $x, $array){
+    public function topLeft($player, $y, $x, $array){
         $buck_array = $array;
         if ($array[$y - 1][$x - 1] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -141,9 +133,8 @@ class Change extends InitArray
     // -----------------------
     // オセロ右上方向 置き換え関数
     // -----------------------
-    public function othelloTopRight($player, $y, $x, $array){
+    public function topRight($player, $y, $x, $array){
         $w = $this->w;
-
         $buck_array = $array;
         if ($array[$y - 1][$x + 1] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -163,9 +154,8 @@ class Change extends InitArray
     // -----------------------
     // オセロ左下方向 置き換え関数
     // -----------------------
-    public function othelloUnderLeft($player, $y, $x, $array){
+    public function underLeft($player, $y, $x, $array){
         $h = $this->h;
-
         $buck_array = $array;
         if ($array[$y + 1][$x - 1] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
@@ -185,10 +175,9 @@ class Change extends InitArray
     // -----------------------
     // オセロ右下方向 置き換え関数
     // -----------------------
-    public function othelloUnderRight($player, $y, $x, $array){
+    public function underRight($player, $y, $x, $array){
         $h = $this->h;
         $w = $this->w;
-
         $buck_array = $array;
         if ($array[$y + 1][$x + 1] == " " . (3 - $player)){
             $array[$y][$x] = " " . $player;
