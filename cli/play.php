@@ -41,33 +41,35 @@ class Play
             $chechboard->player = $player;
             $chechboard->array = $array;
             $canput_count = $chechboard->canPut();
-            if ($canput_count == 0){
-                $chechboard->player = 3 - $player;
-                $canput_count = $chechboard->canPut();
                 if ($canput_count == 0){
-                    $one = 0;
-                    $two = 0;
-                    foreach ($array as $value){
-                        foreach ($value as $num){
-                            if ($num == 1){
-                                $one += 1;
-                            }elseif ($num == 2){
-                                $two += 1;
-                    }   }   }
-                    break;
+                    $chechboard->player = 3 - $player;  // 置けるところがなくなったらplayerを一度変えてみる
+                    $canput_count = $chechboard->canPut();
+                    if ($canput_count == 0){
+                        break;                          // playerを交代しても置けるところがなければ終了
+                    }
+                    echo "置けるところがないのでスキップします";
+                    $player = 3 - $player;
                 }
-                echo "置けるところがないのでスキップします";
-                $player = 3 - $player;
-            }
             echo "置けるパターン数 : " . $canput_count . "パターン \n";
-            
             $changeplayer->player = $player;
             $changeplayer->array = $array;
             $array = $changeplayer->changePlayerInput();
         }
+
+        $player1 = 0;
+        $player2 = 0;
+        foreach ($array as $value){
+            foreach ($value as $num){
+                if ($num == 1){
+                    $player1 += 1;
+                }elseif ($num == 2){
+                    $player2 += 1;
+                }   
+            }   
+        }
     
         echo "置けるところがなくなりました\n";
-        echo "Player1は" . $one . "\n";
-        echo "Player2が" . $two;
+        echo "Player1は" . $player1 . "\n";
+        echo "Player2が" . $player2;
     }
 }
