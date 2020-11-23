@@ -1,27 +1,31 @@
 <?php
+session_start();
 require_once "api.php";
+
+$api = new Api;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(validate()){
         //apiクラスメソッドからの返り値でarrayとplayerを表示する
-        $api = new Api;
+        $x = htmlentities($_POST['x']);
+        $y = htmlentities($_POST['y']);
+        $player = $_POST['player'];
         $array = array_chunk($_POST['array'],6);
-        list($default, $def_player) = $api->getArrayPlayer($_POST['x'], $_POST['y'], $array, $_POST['player']);
-        foreach($default as $value){
-            foreach($value as $num){
-                echo $num;
-            }
-            echo "<br/>";
-        }
-        // var_dump($_POST['array']);
-        // var_dump($def_player);
+        list($_SESSION['array'], $_SESSION["player"], $_SESSION["canput_count"]) = $api->getArrayPlayer($x, $y, $array, $player);
     }else{
-        $default = array_chunk($_POST['array'],6);
-        $def_player = $_POST['player'];
+        $_SESSION["array"] = array_chunk($_POST['array'],6);
+        $_SESSION["player"] = $_POST['player'];
     }
 }else{
-    $default = initial_value();
-    $def_player = 1;
+    if(!isset($_SESSION["array"])){
+        $_SESSION["array"] = initial_value();
+    }
+    if(!isset($_SESSION["player"])){
+        $_SESSION["player"] = "1";
+    }
+    if(!isset($_SESSION["canput_count"])){
+        $_SESSION["canput_count"] = "4";
+    }
 }
 
 function initial_value() {
@@ -69,12 +73,13 @@ function validate(){
         <div class="container">
             <div class="table">
             <table>
+            <tr><td>y\x</td><td>1</td><td>2</td><td>3</td><td>4</td></tr>
                 <?php for($x=1; $x<=4; $x++){
-                    print "<tr>";
+                    print "<tr><td>$x</td>";
                         for($y=1; $y<=4; $y++){
-                            if($default[$x][$y] == 1){
+                            if($_SESSION["array"][$x][$y] == 1){
                                 print "<td>●</td>";
-                            }elseif($default[$x][$y] == 2){
+                            }elseif($_SESSION["array"][$x][$y] == 2){
                                 print "<td>◯</td>"; 
                             }else{
                                 print "<td>&nbsp;&nbsp;&nbsp;</td>";
@@ -85,21 +90,30 @@ function validate(){
             </table>
             </div>
             <div class="text-center">
-                <p>player<?php echo $def_player?></p>
-                <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
-                    <input type="text" name="x">
-                    <input type="text" name="y">
-                    <?php 
-                    for($x=0; $x<6; $x++){
-                        for($y=0; $y<6; $y++){
-                            echo "<input type='hidden' name='array[]' value=" .$default[$x][$y]. ">";
+                <?php if(!$api->finish($_SESSION["array"])){ ?>
+                    <p>player<?php echo $_SESSION["player"]?></p>
+                    <p>おけるパターン数<?php echo $_SESSION["canput_count"]?></p> 
+                    <?php if($_SESSION["canput_count"] == "0"){?>
+                        <p>おけるところがないので適当な数字をセットして次のプレイヤーへ</p>
+                    <?php }?>   
+                    <form action="<?php $_SERVER['PHP_SELF']?>" method="post">
+                        <input type="text" name="x" placeholder="xを入力">
+                        <input type="text" name="y" placeholder="yを入力">
+                        <?php 
+                        for($x=0; $x<6; $x++){
+                            for($y=0; $y<6; $y++){
+                                echo "<input type='hidden' name='array[]' value=" .$_SESSION["array"][$x][$y]. ">";
+                            }
                         }
-                    }
-                    
-                    ?>
-                    <input type="hidden" name="player" value=<?php echo $def_player ?>>
-                    <input type="submit" value="セット">
-                </form>
+                        
+                        ?>
+                        <input type="hidden" name="player" value=<?php echo $_SESSION["player"] ?>>
+                        <input type="submit" value="セット">
+                    </form>
+                <?php }else{?>
+                    <p>ゲーム終了</p>
+                <?php }?>
+                
             </div>
         </div>
     </body>
