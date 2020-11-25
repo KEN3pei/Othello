@@ -32,16 +32,21 @@ class Api{
             }
         }
         if($zero == 0){
-            $action = new Action;
-            $canput_count_1 = $action->canPut($array, 1);
-            $canput_count_2 = $action->canPut($array, 2);
-            if($canput_count_1 == 0 && $canput_count_2 == 0){
-                return true;
-            }else{
-                return false;
-            }
+            return true;
         }else{
             return false;
+        }
+    }
+
+    public function finish2($array){
+
+        $action = new Action;
+        $canput_count_1 = $action->canPut($array, 1);
+        $canput_count_2 = $action->canPut($array, 2);
+        if($canput_count_1 == 0 && $canput_count_2 == 0){
+            return false;
+        }else{
+            return true;
         }
     }
 }
