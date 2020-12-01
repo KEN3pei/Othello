@@ -29,7 +29,7 @@ function show_form($errors = array()){
     }
     $api = new Api;
     $form = new FormHelper;
-    include 'form/index-form.php';
+    include 'form/main_index.php';
 }
 
 function validate(){
@@ -53,7 +53,7 @@ function process_form($input){
     $array = array_chunk($_POST['array'],6);
     list($_SESSION['array'], $_SESSION["player"], $_SESSION["canput_count"]) = $api->getArrayPlayer($x, $y, $array, $player);
     
-    include 'form/index-form.php';
+    include 'form/main_index.php';
 }
 
 
