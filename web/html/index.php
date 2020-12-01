@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require_once "api.php";
-require_once "formhelper.php";
+require_once "form/formhelper.php";
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     list($errors, $input) = validate();
@@ -17,7 +17,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 function show_form($errors = array()){
 
     if(!isset($_SESSION["array"])){
-        $_SESSION["array"] = initial_value();
+        $h = 4;
+        $w = 4;
+        $_SESSION["array"] = initial_value($h, $w);
     }
     if(!isset($_SESSION["player"])){
         $_SESSION["player"] = "1";
@@ -27,7 +29,7 @@ function show_form($errors = array()){
     }
     $api = new Api;
     $form = new FormHelper;
-    include 'index-form.php';
+    include 'form/index-form.php';
 }
 
 function validate(){
@@ -51,13 +53,11 @@ function process_form($input){
     $array = array_chunk($_POST['array'],6);
     list($_SESSION['array'], $_SESSION["player"], $_SESSION["canput_count"]) = $api->getArrayPlayer($x, $y, $array, $player);
     
-    include 'index-form.php';
+    include 'form/index-form.php';
 }
 
 
-function initial_value() {
-    $h = 4;
-    $w = 4;
+function initial_value($h, $w) {
 
     for ($i = 0; $i < $h+2; $i++){
         for ($v = 0; $v < $w+2; $v++){
