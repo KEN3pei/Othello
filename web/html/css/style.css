@@ -1,9 +1,29 @@
+
 table {
     border-collapse: collapse;
-    margin-top: 100px;
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
 }
 table th, table td {
-border: solid 1px black;
+    border: 1px solid black !important;
+}
+
+header{
+    padding: 10px 0;
+}
+header > p{
+    margin-bottom: 0;
+}
+.set_get_form{
+    margin: 10px 0;
+    text-align: right;
+}
+.setform, .getform{
+    width: 10%;
+    display: inline;
+}
+
+.container{
+    background-color: antiquewhite;
 }

@@ -5,7 +5,7 @@ require_once "api.php";
 require_once "form/formhelper.php";
 require_once 'database/connect.php';
 
-$othello_id = 10;
+$othello_id = 12;
 $result = get_othello($othello_id);
 
 if($result){
@@ -19,6 +19,6 @@ if($result){
 
     $api = new Api;
     $form = new FormHelper;
-    include 'check_data.php';
+    include 'form/check_set.php';
 	exit ;
 }
