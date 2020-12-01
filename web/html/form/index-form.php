@@ -61,16 +61,31 @@
                                     echo "<input type='hidden' name='array[]' value=" .$_SESSION["array"][$x][$y]. ">";
                                 }
                             }
-                            
                             ?>
                             <input type="hidden" name="player" value=<?php echo $_SESSION["player"] ?>>
                             <input type="submit" value="セット">
                         </form>
-                     
                 <?php }else{?>
                     <p>ゲーム終了</p>
                 <?php }?>   
-
+            <div class="mt-3">
+                <form action="dbset.php" method="post">
+                    <?php 
+                        for($x=0; $x<6; $x++){
+                        for($y=0; $y<6; $y++){
+                            echo "<input type='hidden' name='array[]' value=" 
+                                            .$_SESSION["array"][$x][$y]. ">";
+                        }
+                        }    
+                    ?>
+                    <input type="hidden" name="canput_count" value=<?php echo $_SESSION["canput_count"] ?>>
+                    <input type="hidden" name="player" value=<?php echo $_SESSION["player"] ?>>
+                    <input type="submit" value="中断">
+                </form>
+                <form action="dbget.php" method="post" class="mt-3">
+                    <input type="submit" value="中断データ取得">
+                </form>
+            </div>
             </div>
         </div>
     </body>
