@@ -1,8 +1,6 @@
 <?php
-session_start();
-
 require_once "api.php";
-require_once "form/formhelper.php";
+require_once "view/formhelper.php";
 require_once 'database/connect.php';
 
 $othello_id = 12;
@@ -19,6 +17,6 @@ if($result){
 
     $api = new Api;
     $form = new FormHelper;
-    include 'form/check_set.php';
+    include 'view/check_set.php';
 	exit ;
 }
