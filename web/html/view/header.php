@@ -1,6 +1,7 @@
 <header class="container mt-5" >
         <div class="set_get_form">
         <a href="index.php">topへ</a>
+        <a href="../delete_session.php">初期化</a>
             <form action="dbset.php" method="post" class="setform">
                 <?php 
                     for($x=0; $x<6; $x++){
