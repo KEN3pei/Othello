@@ -63,7 +63,7 @@ function show_form($errors = array()){
 
     $info = $_GET['info'] ?? 'login';
     $form = new FormHelper;
-    include 'view/login_form.php';
+    include 'login_form.php';
 }
 
 function process_form($input){
