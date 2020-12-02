@@ -22,7 +22,7 @@
         <p>player = <?php echo $_SESSION["player"]?>
         </p>
         <p>おけるパターン数<?php echo $_SESSION["canput_count"]?></p> 
-        <form action="index.php" method="post">
+        <form action="../index.php" method="post">
             <?php 
                 for($x=0; $x<6; $x++){
                     for($y=0; $y<6; $y++){

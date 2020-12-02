@@ -1,7 +1,8 @@
 <?php
-require_once "api.php";
-require_once "view/formhelper.php";
-require_once 'database/connect.php';
+session_name("othello");
+session_start();
+require_once "../view/formhelper.php";
+require_once '../database/connect.php';
 
 $othello_id = 12;
 $result = get_othello($othello_id);
@@ -15,8 +16,7 @@ if($result){
     $_SESSION["player"] = $player;
     $_SESSION["canput_count"] = $pattern;
 
-    $api = new Api;
     $form = new FormHelper;
-    include 'view/check_set.php';
+    include 'check_set.php';
 	exit ;
 }
