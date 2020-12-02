@@ -1,4 +1,5 @@
 <?php 
+session_name("login");
 session_start();
 require_once "api.php";
 require_once "view/formhelper.php";
@@ -29,7 +30,7 @@ function show_form($errors = array()){
     }
     $api = new Api;
     $form = new FormHelper;
-    include 'view/main_index.php';
+    include 'main_index.php';
 }
 
 function validate(){
@@ -47,13 +48,14 @@ function validate(){
 function process_form($input){
     
     $api = new Api;
+    $form = new FormHelper;
     $x = $input['x'];
     $y = $input['y'];
     $player = $_POST['player'];
     $array = array_chunk($_POST['array'],6);
     list($_SESSION['array'], $_SESSION["player"], $_SESSION["canput_count"]) = $api->getArrayPlayer($x, $y, $array, $player);
     
-    include 'view/main_index.php';
+    include 'main_index.php';
 }
 
 

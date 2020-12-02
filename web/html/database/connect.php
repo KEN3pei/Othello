@@ -37,3 +37,18 @@ function get_othello($othello_id){
     }
     return $result;
 }
+
+function insert_user($name, $password){
+
+    $sql = 'INSERT INTO users (name, password) VALUES (:name, :password)';
+    $stmt = $GLOBALS['db']->prepare($sql);
+    $param = array(
+        'name' => $name,
+        'password' => $password
+    );
+    $result = $stmt->execute($param);
+    if(!$result){
+        return false;
+    }
+    return true;
+}

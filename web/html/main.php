@@ -1,4 +1,4 @@
-
+<div class="container">
 <div class="pt-2 mt-4 pb-5">
     <div class="table">
     <?php if($errors) {?>
@@ -61,4 +61,5 @@
             <p>ゲーム終了</p>
         <?php }?>   
     </div>
+</div>
 </div>
