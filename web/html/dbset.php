@@ -8,5 +8,5 @@ $player = $_POST['player'];
 $pattern = $_POST['canput_count'];
 
 if(insert_othello($array, $player, $pattern)){
-    include 'done.php';
+    include 'view/done.php';
 }

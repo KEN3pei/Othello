@@ -63,7 +63,7 @@ function show_form($errors = array()){
 
     $info = $_GET['info'] ?? 'login';
     $form = new FormHelper;
-    include 'login_form.php';
+    include 'view/login_form.php';
 }
 
 function process_form($input){
@@ -80,13 +80,13 @@ function process_form($input){
     $info = $_GET['info'] ?? 'login';
     $api = new Api;
     $form = new FormHelper;
-    include 'main_index.php';
+    include 'view/main_index.php';
 }
 
 function logout(){
 
     $_SESSION['username'] = "";
-    header('Location: login_signup.php');
+    header('Location: ../login_signup.php');
     exit;
 
 }
