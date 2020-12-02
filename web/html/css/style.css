@@ -23,7 +23,12 @@ header > p{
     width: 10%;
     display: inline;
 }
-
 .container{
     background-color: antiquewhite;
+}
+.login-form > p{
+    margin: 0 !important;
+}
+.login-form > input{
+    margin: 5px 0 10px 0;
 }
