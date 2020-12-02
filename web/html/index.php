@@ -47,6 +47,7 @@ function validate(){
 function process_form($input){
     
     $api = new Api;
+    $form = new FormHelper;
     $x = $input['x'];
     $y = $input['y'];
     $player = $_POST['player'];
