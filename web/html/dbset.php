@@ -7,6 +7,6 @@ $player = $_POST['player'];
 $pattern = $_POST['canput_count'];
 
 if(insert_othello($array, $player, $pattern)){
-    header( "Location: view/done.html" ) ;
+    header( "Location: view/done.php" ) ;
 	exit ;
 }

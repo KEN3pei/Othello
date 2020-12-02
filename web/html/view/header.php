@@ -6,7 +6,7 @@
         <a href="../login_signup.php?info=login">login</a>
         <a href="../login_signup.php?info=signup">signup</a>
     <?php }else{?>
-        <form action="dbset.php" method="post" class="setform">
+        <form action="../dbset.php" method="post" class="setform">
             <?php 
                 for($x=0; $x<6; $x++){
                     for($y=0; $y<6; $y++){
