@@ -1,5 +1,6 @@
 <?php
-
+session_name("login");
+session_start();
 require_once 'database/connect.php';
 
 $array = $_POST['array'];
