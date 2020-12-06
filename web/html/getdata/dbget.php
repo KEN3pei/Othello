@@ -4,8 +4,8 @@ session_start();
 require_once "../view/formhelper.php";
 require_once '../database/connect.php';
 
-$othello_id = 12;
-$result = get_othello($othello_id);
+$user_id = $_POST['id'];
+$result = get_othello($user_id);
 
 if($result){
     $othello_array = unserialize($result["othello_array"]);
@@ -18,5 +18,8 @@ if($result){
 
     $form = new FormHelper;
     include 'check_set.php';
-	exit ;
+}else{
+    $error = true;
+    $form = new FormHelper;
+    include 'check_set.php';
 }

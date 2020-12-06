@@ -33,7 +33,6 @@ function login_validate(){
         $stmt->execute((array)$input['name']);
         $row = $stmt->fetch();
         if($row){
-            //ここで本来はpassword_verifyを行う
             $password_ok = password_verify($input['password'], $row["password"]);
         }
         if(!$password_ok){
@@ -70,7 +69,13 @@ function process_form($input){
     
     if($_POST['submit'] == "login"){
         //sessonにusernameをセットしてログイン状態にする
+        $stmt = $GLOBALS['db']->prepare('SELECT id FROM users WHERE name = ?');
+        $stmt->execute((array)$input['name']);
+        $row = $stmt->fetch();
+        
+        $_SESSION['id'] = $row["id"];
         $_SESSION['username'] = $input['name'];
+
     }elseif($_POST['submit'] == "signup"){
         //nameとpasswordをdbにセットする
         $hashedpassword = password_hash($input['password'], PASSWORD_DEFAULT);
@@ -85,6 +90,10 @@ function process_form($input){
 
 function logout(){
 
+    $_SESSION["array"] = "";
+    $_SESSION["player"] = "";
+    $_SESSION["canput_count"] = "";
+    $_SESSION['id'] = "";
     $_SESSION['username'] = "";
     header('Location: ../login_signup.php');
     exit;

@@ -15,11 +15,12 @@
                     }
                 }    
             ?>
-            <input type="hidden" name="canput_count" value=<?php echo $_SESSION["canput_count"] ?>>
-            <input type="hidden" name="player" value=<?php echo $_SESSION["player"] ?>>
+            <input type="hidden" name="canput_count" value=<?= $_SESSION["canput_count"] ?>>
+            <input type="hidden" name="player" value=<?= $_SESSION["player"] ?>>
             <input type="submit" value="中断">
         </form>
         <form action="getdata/dbget.php" method="post" class="getform">
+            <input type="hidden" name="id" value=<?= $_SESSION["id"] ?>>
             <input type="submit" value="中断データ取得">
         </form>
         <a href="login_signup.php?info=logout">logout</a>
