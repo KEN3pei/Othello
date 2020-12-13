@@ -12,6 +12,11 @@
         <?php }?>
         </div>
         <div class="text-center">
+            <?php if($info == 'login'){?>
+                <h4 class="mb-4">Login</h4>
+            <?php }else{?>
+                <h4 class="mb-4">Sign Up</h4>
+            <?php }?>
             <form action="<?php $_SERVER['PHP_SELF']?>" class="login-form" method="post">
                 <p>name</p>
                 <input type="text" name="name">
