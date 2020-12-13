@@ -87,15 +87,3 @@ function process_form($input){
     $form = new FormHelper;
     include 'view/main_index.php';
 }
-
-function logout(){
-
-    $_SESSION["array"] = "";
-    $_SESSION["player"] = "";
-    $_SESSION["canput_count"] = "";
-    $_SESSION['id'] = "";
-    $_SESSION['username'] = "";
-    header('Location: ../login_signup.php');
-    exit;
-
-}
