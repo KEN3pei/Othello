@@ -1,7 +1,7 @@
 <div class="container">
 <div class="pt-2 mt-4 pb-5">
     <div class="table">
-    <?php if($errors) {?>
+    <?php if(!empty($errors)) {?>
         <tr>
             <td>You Need to correct the following errors:</td>
             <td><ul>
