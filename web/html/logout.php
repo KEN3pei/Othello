@@ -15,6 +15,8 @@ function logout(){
     $_SESSION["canput_count"] = "";
     $_SESSION['id'] = "";
     $_SESSION['username'] = "";
-    header('Location: login_signup.php');
+
+    // index.phpにここで飛ばず直後にloginするとsessionに値がないためエラーになる
+    header('Location: index.php');
     exit;
 }
