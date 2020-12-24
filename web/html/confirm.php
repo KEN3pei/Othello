@@ -10,7 +10,7 @@
         <?php require_once "view/header.php"; ?>
         <div class="container text-center">
             <div class="pt-2 mt-4 pb-5">
-                <?php if($link == "reset"){?>
+                <?php if(!empty($link) && $link == "reset"){?>
                     <p>初期化します</p>
                 <?php }else{?>
                     <p>logoutします</p>

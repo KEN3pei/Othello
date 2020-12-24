@@ -81,3 +81,15 @@ function insert_user($name, $password){
     }
     return true;
 }
+
+function get_user_names(){
+
+    $sql = 'SELECT name FROM users';
+    $stmt = $GLOBALS['db']->prepare($sql);
+    $stmt->execute();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if(!$result){
+        return false;
+    }
+    return $result;
+}

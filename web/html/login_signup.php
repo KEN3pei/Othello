@@ -4,10 +4,13 @@ session_start();
 require_once "api.php";
 require_once "view/formhelper.php";
 require_once "database/connect.php";
+error_reporting(E_ALL);
 
-if($_GET['info'] == "logout"){
-    logout();
-}
+// if(!empty($_GET)){
+//     if($_GET['info'] == "logout"){
+//         logout();
+//     }
+// }
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($_POST['submit'] == "login"){
@@ -25,23 +28,32 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 }
 
 function login_validate(){
+    $errors = [];
     $input['name'] = trim($_POST['name'] ?? '');
     $input['password'] = trim($_POST['password'] ?? '');
 
-    if(!empty($input['name']) || !empty($input['password'])){
-        $stmt = $GLOBALS['db']->prepare('SELECT password FROM users WHERE name = ?');
-        $stmt->execute((array)$input['name']);
-        $row = $stmt->fetch();
-        if($row){
-            $password_ok = password_verify($input['password'], $row["password"]);
-        }
-        if(!$password_ok){
+    if(empty($input['name']) || !preg_match("/^[a-zA-Z0-9]+$/", $input['name'])){
+        $errors[] = 'Please enter your name';
+    }
+    if(empty($input['password']) || !preg_match("/^[a-zA-Z0-9]+$/", $input['password'])){
+        $errors[] = 'Please enter your password';
+    }
+
+    if(preg_match("/^[a-zA-Z0-9]+$/", $input['name']) && preg_match("/^[a-zA-Z0-9]+$/", $input['password'])){
+        if(!empty($input['name']) || !empty($input['password'])){
+            $stmt = $GLOBALS['db']->prepare('SELECT password FROM users WHERE name = ?');
+            $stmt->execute((array)$input['name']);
+            $row = $stmt->fetch();
+            if($row){
+                $password_ok = password_verify($input['password'], $row["password"]);
+            }
+            if(!$password_ok){
+                $errors[] = 'Please enter a valid username and password';
+            }
+        }else{
             $errors[] = 'Please enter a valid username and password';
         }
-    }else{
-        $errors[] = 'Please enter a valid username and password';
     }
-    
     return array($errors, $input);
 }
 
@@ -55,6 +67,13 @@ function signup_validate(){
     if(empty($input['password']) || !preg_match("/^[a-zA-Z0-9]+$/", $input['password'])){
         $errors[] = 'Please enter your password';
     }
+    $user_names = get_user_names();
+    foreach($user_names as $name){
+        if($input['name'] == $name['name']){
+            $errors[] = 'Please enter your name';
+        }
+    }
+
     return array($errors, $input);
 }
 

@@ -1,7 +1,7 @@
 <?php 
 session_name("login");
 session_start();
-error_reporting(E_ALL);
+
 require_once "api.php";
 require_once "view/formhelper.php";
 
