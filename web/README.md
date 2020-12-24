@@ -9,3 +9,5 @@ docker-compose up -d
 ```accessURL
 localhost:80/web_othello.php
 ```
+
+databaseディレクトリ以下のsqlファイルを読み込んでDBを作成できる
