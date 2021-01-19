@@ -6,11 +6,8 @@ require_once "view/formhelper.php";
 require_once "database/connect.php";
 error_reporting(E_ALL);
 
-// if(!empty($_GET)){
-//     if($_GET['info'] == "logout"){
-//         logout();
-//     }
-// }
+$api = new Api;
+$form = new FormHelper;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if($_POST['submit'] == "login"){
@@ -79,12 +76,16 @@ function signup_validate(){
 
 function show_form($errors = array()){
 
+    global $form;
+
     $info = $_GET['info'] ?? 'login';
-    $form = new FormHelper;
     include 'view/login_form.php';
 }
 
 function process_form($input){
+
+    global $api;
+    global $form;
     
     if($_POST['submit'] == "login"){
         //sessonにusernameをセットしてログイン状態にする
@@ -100,9 +101,7 @@ function process_form($input){
         $hashedpassword = password_hash($input['password'], PASSWORD_DEFAULT);
         insert_user($input['name'], $hashedpassword);
     }
-
     $info = $_GET['info'] ?? 'login';
-    $api = new Api;
-    $form = new FormHelper;
+
     include 'view/main_index.php';
 }

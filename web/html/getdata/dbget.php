@@ -4,6 +4,7 @@ session_start();
 require_once "../view/formhelper.php";
 require_once '../database/connect.php';
 
+$form = new FormHelper;
 $user_id = $_POST['id'];
 $result = get_othello($user_id);
 
@@ -16,10 +17,8 @@ if($result){
     $_SESSION["player"] = $player;
     $_SESSION["canput_count"] = $pattern;
 
-    $form = new FormHelper;
     include 'check_set.php';
 }else{
     $error = true;
-    $form = new FormHelper;
     include 'check_set.php';
 }

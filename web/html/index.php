@@ -4,6 +4,8 @@ session_start();
 
 require_once "api.php";
 require_once "view/formhelper.php";
+$api = new Api;
+$form = new FormHelper;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     list($errors, $input) = validate();
@@ -18,6 +20,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 function show_form($errors = array()){
 
+    global $api;
+    global $form;
+
     if(empty($_SESSION["array"])){
         $h = 4;
         $w = 4;
@@ -29,12 +34,11 @@ function show_form($errors = array()){
     if(empty($_SESSION["canput_count"])){
         $_SESSION["canput_count"] = "4";
     }
-    $api = new Api;
-    $form = new FormHelper;
+
     include 'view/main_index.php';
 }
 
-function validate(){
+function validate($errors = array()){
     $input['x'] = filter_input(INPUT_POST, 'x', FILTER_VALIDATE_INT);
     if(is_null($input['x']) || ($input['x'] === false)){
         $errors[] = "x is validated";
@@ -48,8 +52,9 @@ function validate(){
 
 function process_form($input){
     
-    $api = new Api;
-    $form = new FormHelper;
+    global $api;
+    global $form;
+    
     $x = $input['x'];
     $y = $input['y'];
     $player = $_POST['player'];
